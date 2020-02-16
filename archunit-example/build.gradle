@@ -11,8 +11,6 @@ ext.moduleName = 'com.tngtech.archunit.example'
         addTestJarTo proj
 
         proj.with {
-            apply plugin: "java-library"
-
             dependencies {
                 // NOTE: The pure javaee-api dependencies are crippled,
                 //       so to run any test we need to choose a full implementation provider
