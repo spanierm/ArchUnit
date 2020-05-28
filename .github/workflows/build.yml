@@ -52,6 +52,7 @@ jobs:
           echo ${JAVA_HOME_MAVEN}
           JAVA_HOME=${JAVA_HOME_11_X64} &&
           echo ${JAVA_HOME}
+          echo "./gradlew runMavenTest -Pjava${JAVA_VERSION}Home=${JAVA_MAVEN_VERSION}"
           ./gradlew runMavenTest -Pjava${JAVA_VERSION}Home=${JAVA_MAVEN_VERSION}
   build-windows:
     strategy:
@@ -96,4 +97,4 @@ jobs:
           $env:JAVA_HOME_MAVEN
           $env:JAVA_HOME = $env:JAVA_HOME_11_X64
           $env:JAVA_HOME
-          '.\gradlew.bat runMavenTest -Pjava{0}Home' -f $env:JAVA_VERSION
+          .\gradlew.bat runMavenTest '-Pjava{0}Home={1}' -f $env:JAVA_VERSION,$env:JAVA_HOME_MAVEN
