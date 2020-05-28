@@ -31,6 +31,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Print environment for debugging
+        run: env
       - name: Build
         run: ./gradlew -PallTests build
       - name: Prepare integration test
@@ -39,6 +41,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java_version }}
+      - name: Print environment for debugging
+        run: env
       - name: Integration test
         run: |
           JAVA_HOME_MAVEN=${JAVA_HOME}
@@ -68,6 +72,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Print environment for debugging
+        run: env
       - name: Build
         run: .\gradlew.bat -PallTests build
       - name: Prepare integration test
@@ -76,6 +82,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java_version }}
+      - name: Print environment for debugging
+        run: env
       - name: Integration test
         run: |
           $env:JAVA_HOME_MAVEN = $env:JAVA_HOME
