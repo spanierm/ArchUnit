@@ -50,10 +50,10 @@ jobs:
           echo ${JAVA_VERSION}
           JAVA_HOME_MAVEN=${JAVA_HOME}
           echo ${JAVA_HOME_MAVEN}
-          JAVA_HOME=${JAVA_HOME_11_X64} &&
+          JAVA_HOME=${JAVA_HOME_11_X64}
           echo ${JAVA_HOME}
-          echo "./gradlew runMavenTest -Pjava${JAVA_VERSION}Home=${JAVA_MAVEN_VERSION}"
-          ./gradlew runMavenTest -Pjava${JAVA_VERSION}Home=${JAVA_MAVEN_VERSION}
+          echo "./gradlew runMavenTest -Pjava${JAVA_VERSION}Home=${JAVA_HOME_MAVEN}"
+          ./gradlew runMavenTest -Pjava${JAVA_VERSION}Home=${JAVA_HOME_MAVEN}
   build-windows:
     strategy:
       matrix:

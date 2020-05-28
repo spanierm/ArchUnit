@@ -161,10 +161,11 @@ def addMavenTest = { config ->
                 println System.getenv("JAVA_HOME")
 
                 println System.getenv("JAVA_MAVEN_HOME") ?: System.getenv("JAVA_HOME")
+                println config.jdkPath
 
-//                if (config.jdkPath) {
-                    environment JAVA_HOME: System.getenv("JAVA_MAVEN_HOME") ?: System.getenv("JAVA_HOME")
-//                }
+                if (config.jdkPath) {
+                    environment JAVA_HOME: config.jdkPath
+                }
 
                 println System.getenv("JAVA_HOME")
                 println "DEBUG LOGS END"
