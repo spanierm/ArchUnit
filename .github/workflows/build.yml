@@ -14,7 +14,10 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-        java_version:
+        java_version_build:
+          - 11
+          - 14
+        java_version_test:
           -  7
 #          -  8
 #          -  9
@@ -30,7 +33,7 @@ jobs:
       - name: Set up Java for build
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: ${{ matrix.java_version_build }}
       - name: Print environment for debugging
         run: env
       - name: Build
@@ -40,17 +43,19 @@ jobs:
       - name: Set up Java for integration test
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java_version }}
+          java-version: ${{ matrix.java_version_test }}
       - name: Print environment for debugging
         run: env
       - name: Integration test
         env:
-          JAVA_VERSION: ${{ matrix.java_version }}
+          JAVA_VERSION: ${{ matrix.java_version_test }}
         run: |
           echo ${JAVA_VERSION}
           JAVA_HOME_MAVEN=${JAVA_HOME}
           echo ${JAVA_HOME_MAVEN}
-          JAVA_HOME=${JAVA_HOME_11_X64}
+          JAVA_HOME_TEMPLATE=JAVA_HOME_${JAVA_VERSION}_X64
+          echo ${JAVA_HOME_TEMPLATE}
+          JAVA_HOME=${JAVA_HOME_TEMPLATE}
           echo ${JAVA_HOME}
           echo "./gradlew runMavenTest -Pjava${JAVA_VERSION}Home=${JAVA_HOME_MAVEN}"
           ./gradlew runMavenTest -Pjava${JAVA_VERSION}Home=${JAVA_HOME_MAVEN}
@@ -59,7 +64,10 @@ jobs:
       matrix:
         os:
           - windows-latest
-        java_version:
+        java_version_build:
+          - 11
+          - 14
+        java_version_test:
           -  7
 #          -  8
 #          -  9
@@ -75,7 +83,7 @@ jobs:
       - name: Set up Java for build
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: ${{ matrix.java_version_build }}
       - name: Print environment for debugging
         run: env
       - name: Build
@@ -85,16 +93,21 @@ jobs:
       - name: Set up Java for integration test
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java_version }}
+          java-version: ${{ matrix.java_version_test }}
       - name: Print environment for debugging
         run: env
       - name: Integration test
         env:
-          JAVA_VERSION: ${{ matrix.java_version }}
+          JAVA_VERSION: ${{ matrix.java_version_test }}
         run: |
+          $env:JAVA_VERSION
           $env:JAVA_VERSION
           $env:JAVA_HOME_MAVEN = $env:JAVA_HOME
           $env:JAVA_HOME_MAVEN
-          $env:JAVA_HOME = $env:JAVA_HOME_11_X64
+          $env:JAVA_HOME_TEMPLATE = "JAVA_HOME_$($env:JAVA_VERSION)_X64"
+          $env:JAVA_HOME_TEMPLATE
+          $env:JAVA_HOME = $env:JAVA_HOME_TEMPLATE
           $env:JAVA_HOME
           .\gradlew.bat runMavenTest "-Pjava$($env:JAVA_VERSION)Home=$($env:JAVA_HOME_MAVEN)"
+
+# TODO: Push to internal Github Registry
