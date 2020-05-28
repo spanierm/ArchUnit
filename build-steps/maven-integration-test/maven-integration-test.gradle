@@ -147,9 +147,25 @@ def addMavenTest = { config ->
             return {
                 workingDir mavenTestRootDir
 
+                println "DEBUG LOGS START"
+                println System.getProperty("java7Home")
+                println System.getProperty("java8Home")
+                println System.getProperty("java9Home")
+                println System.getProperty("java10Home")
+                println System.getProperty("java11Home")
+                println System.getProperty("java12Home")
+                println System.getProperty("java13Home")
+                println System.getProperty("java14Home")
+
+                println System.getenv("JAVA_HOME_MAVEN")
+                println System.getenv("JAVA_HOME")
+
                 if (config.jdkPath) {
                     environment JAVA_HOME: config.jdkPath
                 }
+
+                println System.getenv("JAVA_HOME")
+                println "DEBUG LOGS END"
 
                 delegate.with(closure)
             }
