@@ -96,4 +96,4 @@ jobs:
           $env:JAVA_HOME_MAVEN
           $env:JAVA_HOME = $env:JAVA_HOME_11_X64
           $env:JAVA_HOME
-          .\gradlew.bat runMavenTest
+          '.\gradlew.bat runMavenTest -Pjava{0}Home' -f $env:JAVA_VERSION
