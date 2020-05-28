@@ -35,6 +35,14 @@ public class TestResultTest {
 
     @Test
     public void test_result_matches() throws Exception {
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.printf("JAVA_HOME=%s", System.getenv("JAVA_HOME"));
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
+
         GivenTestClasses givenTestClasses = GivenTestClasses.findAll();
 
         ImportedTestResults importedTestResults = ImportedTestResults.importAll();
