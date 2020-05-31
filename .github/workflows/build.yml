@@ -48,7 +48,7 @@ jobs:
         run: env
       - name: Integration test
         env:
-          JAVA_VERSION: ${{ matrix.java_version_test }}
+          JAVA_VERSION: ${{ matrix.java_version_build }}
         run: |
           echo ${JAVA_VERSION}
           JAVA_HOME_MAVEN=${JAVA_HOME}
