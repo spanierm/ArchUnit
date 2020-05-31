@@ -55,7 +55,7 @@ jobs:
           echo ${JAVA_HOME_MAVEN}
           JAVA_HOME_TEMPLATE=JAVA_HOME_${JAVA_VERSION}_X64
           echo ${JAVA_HOME_TEMPLATE}
-          JAVA_HOME=${JAVA_HOME_TEMPLATE}
+          JAVA_HOME=${!JAVA_HOME_TEMPLATE}
           echo ${JAVA_HOME}
           echo "./gradlew runMavenTest -Pjava${JAVA_VERSION}Home=${JAVA_HOME_MAVEN}"
           ./gradlew runMavenTest -Pjava${JAVA_VERSION}Home=${JAVA_HOME_MAVEN}
