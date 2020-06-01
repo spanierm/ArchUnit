@@ -16,7 +16,7 @@ jobs:
           - macos-latest
         java_version_build:
           - 11
-#          - 14
+          - 14
         java_version_test:
           -  7
 #          -  8
@@ -53,10 +53,10 @@ jobs:
         run: |
           echo "JAVA_VERSION_TEST=${JAVA_VERSION_TEST}"
           JAVA_HOME_MAVEN=${JAVA_HOME}
-          echo "JAVA_HOME_MAVEN-${JAVA_HOME_MAVEN}"
+          echo "JAVA_HOME_MAVEN=${JAVA_HOME_MAVEN}"
 
           echo "JAVA_VERSION_BUILD=${JAVA_VERSION_BUILD}"
-          JAVA_HOME_BUILD_TEMPLATE=JAVA_HOME_${JAVA_VERSION_BUILD}_X64
+          JAVA_HOME_BUILD_TEMPLATE="JAVA_HOME_${JAVA_VERSION_BUILD}_X64"
           echo "JAVA_HOME_BUILD_TEMPLATE=${JAVA_HOME_BUILD_TEMPLATE}"
           JAVA_HOME=${!JAVA_HOME_BUILD_TEMPLATE}
           echo "JAVA_HOME=${JAVA_HOME}"
@@ -102,16 +102,20 @@ jobs:
         run: env
       - name: Integration test
         env:
-          JAVA_VERSION: ${{ matrix.java_version_test }}
+          JAVA_VERSION_BUILD: ${{ matrix.java_version_build }}
+          JAVA_VERSION_TEST: ${{ matrix.java_version_test }}
         run: |
-          $env:JAVA_VERSION
-          $env:JAVA_VERSION
+          echo "JAVA_VERSION_TEST=$env:JAVA_VERSION_TEST"
           $env:JAVA_HOME_MAVEN = $env:JAVA_HOME
-          $env:JAVA_HOME_MAVEN
-          $env:JAVA_HOME_TEMPLATE = "JAVA_HOME_$($env:JAVA_VERSION)_X64"
-          $env:JAVA_HOME_TEMPLATE
-          $env:JAVA_HOME = $env:JAVA_HOME_TEMPLATE
-          $env:JAVA_HOME
-          .\gradlew.bat runMavenTest "-Pjava$($env:JAVA_VERSION)Home=$($env:JAVA_HOME_MAVEN)"
+          echo "JAVA_HOME_MAVEN=$env:JAVA_HOME_MAVEN"
+
+          echo "JAVA_VERSION_BUILD=$env:JAVA_VERSION_BUILD"
+          $env:JAVA_HOME_BUILD_TEMPLATE = "JAVA_HOME_$($env:JAVA_VERSION_BUILD)_X64"
+          echo "JAVA_HOME_BUILD_TEMPLATE=$env:JAVA_HOME_BUILD_TEMPLATE"
+          $env:JAVA_HOME = "$env:($env:JAVA_HOME_BUILD_TEMPLATE)"
+          echo "JAVA_HOME=$env:JAVA_HOME"
+
+          echo ".\gradlew.bat runMavenTest "-Pjava$($env:JAVA_VERSION_TEST)Home=$($env:JAVA_HOME_MAVEN)"
+          .\gradlew.bat runMavenTest "-Pjava$($env:JAVA_VERSION_TEST)Home=$($env:JAVA_HOME_MAVEN)"
 
 # TODO: Push to internal Github Registry
