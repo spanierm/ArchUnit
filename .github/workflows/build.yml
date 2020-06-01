@@ -16,7 +16,7 @@ jobs:
           - macos-latest
         java_version_build:
           - 11
-          - 14
+#          - 14
         java_version_test:
           -  7
 #          -  8
@@ -70,7 +70,7 @@ jobs:
           - windows-latest
         java_version_build:
           - 11
-          - 14
+#          - 14
         java_version_test:
           -  7
 #          -  8
@@ -105,15 +105,15 @@ jobs:
           JAVA_VERSION_BUILD: ${{ matrix.java_version_build }}
           JAVA_VERSION_TEST: ${{ matrix.java_version_test }}
         run: |
-          echo "JAVA_VERSION_TEST=$env:JAVA_VERSION_TEST"
+          $env:JAVA_VERSION_TEST
           $env:JAVA_HOME_MAVEN = $env:JAVA_HOME
-          echo "JAVA_HOME_MAVEN=$env:JAVA_HOME_MAVEN"
+          $env:JAVA_HOME_MAVEN
 
-          echo "JAVA_VERSION_BUILD=$env:JAVA_VERSION_BUILD"
+          $env:JAVA_VERSION_BUILD
           $env:JAVA_HOME_BUILD_TEMPLATE = "JAVA_HOME_$($env:JAVA_VERSION_BUILD)_X64"
-          echo "JAVA_HOME_BUILD_TEMPLATE=$env:JAVA_HOME_BUILD_TEMPLATE"
-          $env:JAVA_HOME = "$env:($env:JAVA_HOME_BUILD_TEMPLATE)"
-          echo "JAVA_HOME=$env:JAVA_HOME"
+          $env:JAVA_HOME_BUILD_TEMPLATE
+          $env:JAVA_HOME = "$env:{$($env:JAVA_HOME_BUILD_TEMPLATE)}"
+          $env:JAVA_HOME
 
           echo ".\gradlew.bat runMavenTest "-Pjava$($env:JAVA_VERSION_TEST)Home=$($env:JAVA_HOME_MAVEN)"
           .\gradlew.bat runMavenTest "-Pjava$($env:JAVA_VERSION_TEST)Home=$($env:JAVA_HOME_MAVEN)"
