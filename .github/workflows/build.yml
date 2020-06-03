@@ -115,7 +115,7 @@ jobs:
           $env:JAVA_HOME = (Get-Item ("env:\" + (Get-Item env:\JAVA_HOME_BUILD_TEMPLATE).Value)).Value
           $env:JAVA_HOME
 
-          echo ".\gradlew.bat runMavenTest "-Pjava$($env:JAVA_VERSION_TEST)Home=$($env:JAVA_HOME_MAVEN)"
+          echo .\gradlew.bat runMavenTest "-Pjava$($env:JAVA_VERSION_TEST)Home=$($env:JAVA_HOME_MAVEN)"
           .\gradlew.bat runMavenTest "-Pjava$($env:JAVA_VERSION_TEST)Home=$($env:JAVA_HOME_MAVEN)"
 
 # TODO: Push to internal Github Registry
