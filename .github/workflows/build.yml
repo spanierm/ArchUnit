@@ -19,12 +19,12 @@ jobs:
 #          - 14
         java_version_test:
           -  7
-#          -  8
-#          -  9
-#          - 10
-#          - 11
-#          - 12
-#          - 13
+          -  8
+          -  9
+          - 10
+          - 11
+          - 12
+          - 13
           - 14
     runs-on: ${{ matrix.os }}
     steps:
@@ -73,12 +73,12 @@ jobs:
 #          - 14
         java_version_test:
           -  7
-#          -  8
-#          -  9
-#          - 10
-#          - 11
-#          - 12
-#          - 13
+          -  8
+          -  9
+          - 10
+          - 11
+          - 12
+          - 13
           - 14
     runs-on: ${{ matrix.os }}
     steps:
