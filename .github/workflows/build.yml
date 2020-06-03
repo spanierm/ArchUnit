@@ -112,7 +112,7 @@ jobs:
           $env:JAVA_VERSION_BUILD
           $env:JAVA_HOME_BUILD_TEMPLATE = "JAVA_HOME_$($env:JAVA_VERSION_BUILD)_X64"
           $env:JAVA_HOME_BUILD_TEMPLATE
-          $env:JAVA_HOME = "$env:{$($env:JAVA_HOME_BUILD_TEMPLATE)}"
+          $env:JAVA_HOME = (Get-Item ("env:\" + (Get-Item env:\JAVA_HOME_BUILD_TEMPLATE).Value)).Value
           $env:JAVA_HOME
 
           echo ".\gradlew.bat runMavenTest "-Pjava$($env:JAVA_VERSION_TEST)Home=$($env:JAVA_HOME_MAVEN)"
